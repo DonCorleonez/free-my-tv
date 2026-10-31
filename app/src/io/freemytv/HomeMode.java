@@ -704,6 +704,7 @@ final class HomeMode {
             }
             wakeWatch(adb, false);
             SleepTimer.stop(c);
+            PrayerScheduler.cancel(c);   // no prayer popups over the factory home screen
             adb.shell("appops set " + PKG + " SYSTEM_ALERT_WINDOW default");   // SleepOverlay's, if it was allowed
             Capabilities.forget(c, Capabilities.OVERLAY);                       // asked again next time
             try {
@@ -818,6 +819,7 @@ final class HomeMode {
                 restoreScreensaver(adb, s);
                 wakeWatch(adb, false);
                 SleepTimer.stop(app);   // its row shows Unavailable from now on
+                PrayerScheduler.cancel(app);   // no prayer popups over the factory home screen
                 try {
                     nowPlaying(app, adb, false);   // and so does Now Playing's
                 } catch (IOException e) {
