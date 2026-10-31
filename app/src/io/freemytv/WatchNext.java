@@ -35,6 +35,7 @@ final class WatchNext {
 
     static final class Item {
         String pkg, title, episode;     // episode: "S2 E5" (in the TV's language) or the episode's title, or null
+        String seasonNum, episodeNum;   // raw season/episode numbers from TvContract, or null (for TMDB episode lookup)
         String app;                     // the app's name, for the card's details line
         long duration, position, engaged;
         String intent;
@@ -222,6 +223,8 @@ final class WatchNext {
                 it.title = title;
                 String season = text(cur, TvContract.WatchNextPrograms.COLUMN_SEASON_DISPLAY_NUMBER);
                 String episode = text(cur, TvContract.WatchNextPrograms.COLUMN_EPISODE_DISPLAY_NUMBER);
+                it.seasonNum = season;
+                it.episodeNum = episode;
                 // Season and episode as each language writes them: "S2 E5", "T2 E5" (temporada), "St. 2 F. 5".
                 it.episode = season != null && episode != null
                         ? Ui.trf("S{season} E{episode}", "season", season, "episode", episode)

@@ -257,6 +257,13 @@
             android:process=":sleep"
             android:exported="false" />
 
+        <!-- The prayer popups over any app, at prayer time and 5 minutes before. A process of its own, like
+             SleepOverlay's, so a popup never keeps the home screen in memory under the app in front. -->
+        <service
+            android:name=".PrayerPopupService"
+            android:process=":prayer"
+            android:exported="false" />
+
         <!-- Lets the home screen and the screensaver read what apps are playing (their media sessions); it unbinds itself
              at once, so no process stays up for it. -->
         <service
